@@ -806,7 +806,7 @@ const Popup = ({setIsPopupOpen, onAddToCart, onBuyFast, currPopupData}) => {
 function PageHeader({height, src}) {
   return (
     <div
-      className={`flex justify-center items-center w-full`}
+      className={`flex justify-center items-center w-full px-1`}
       style={{
         height,
       }}>
@@ -864,21 +864,19 @@ function Card({
           </div>
         </div>
       ) : (
-        <div className={`p-1 ${width} cursor-pointer`}>
-          <div
-            className='relative shadow-md '
-            onClick={() =>
-              handleClickOnImage({
-                imageUrl,
-                imageAlt,
-                priceAfterRival,
-                priceBeforeRival,
-                description,
-                id,
-              })
-            }>
-            <Image src={imageUrl} alt={imageAlt} width={400} height={200} />
-          </div>
+        <div
+          className={` ${width} cursor-pointer relative shadow-md p-1`}
+          onClick={() =>
+            handleClickOnImage({
+              imageUrl,
+              imageAlt,
+              priceAfterRival,
+              priceBeforeRival,
+              description,
+              id,
+            })
+          }>
+          <Image src={imageUrl} alt={imageAlt} width={400} height={200} />
         </div>
       )}
     </>
@@ -888,7 +886,7 @@ function Card({
 function PageFooter({height, src}) {
   return (
     <div
-      className={`flex justify-center items-center w-full`}
+      className={`flex justify-center items-center w-full px-1`}
       style={{
         height,
       }}>
@@ -905,28 +903,24 @@ function PageFooter({height, src}) {
 
 function PageBody({data, handleClickOnImage}) {
   return (
-    <div>
-      <div className='container mx-auto '>
-        <div className='flex flex-wrap '>
-          {data?.map((item, key) => (
-            <Card
-              key={key}
-              imageUrl={item?.imageUrl}
-              imageAlt={item?.imageAlt}
-              id={item?.id}
-              handleClickOnImage={handleClickOnImage}
-              width='w-1/4'
-            />
-          ))}
-        </div>
-      </div>
+    <div className='flex flex-wrap w-full'>
+      {data?.map((item, key) => (
+        <Card
+          key={key}
+          imageUrl={item?.imageUrl}
+          imageAlt={item?.imageAlt}
+          id={item?.id}
+          handleClickOnImage={handleClickOnImage}
+          width='w-1/4'
+        />
+      ))}
     </div>
   )
 }
 
 const Page = React.forwardRef((props, ref) => {
   return (
-    <div className='page h-full' ref={ref}>
+    <div className='page h-full  w-full' ref={ref}>
       <div className=' flex flex-col h-full justify-between '>
         <PageHeader height={props?.headerHeight} src={props?.srcHeaderBg} />
         <PageBody
@@ -1006,7 +1000,6 @@ const Test = () => {
       item.page.body.find(itemF => itemF.id === id)
     )
 
-    // console.log('you click on imageAlt', imageAlt)
     setCurrPopupData(newObj[0]?.page?.body?.find(item => item?.id == id))
     setIsPopupOpen(true)
   }
@@ -1024,36 +1017,41 @@ const Test = () => {
             .map(item => item.page.body)
             .flat()}
         />
-        <div className={` px-10 w-full h-full flex flex-col`}>
-          <HTMLFlipBook
-            width={800}
-            height={1200}
-            size='stretch'
-            maxShadowOpacity={0.5}
-            // showCover={true}
-            usePortrait={false}
-            useMouseEvents={false}
-            mobileScrollSupport={true}
-            onFlip={onPage}
-            className={`demo-book h-screen w-full`}
-            ref={flipBookRef}>
-            {dataProducts?.map((item, key) => (
-              <Page
-                data={item?.page?.body}
-                footerHeight={item?.page?.footerSize}
-                headerHeight={item?.page?.headerSize}
-                number={key}
-                srcHeaderBg={item?.page?.headerBg}
-                srcFooterBg={item?.page?.footerBg}
-                handleClickOnImage={handleClickOnImage}
-                key={key}>
-                Lorem ipsum...
-              </Page>
-            ))}
-          </HTMLFlipBook>
-
-          <div className='container mx-auto my-4 '>
-            <div className='flex items-center justify-center gap-5'>
+        <div className='flex flex-col'>
+          <div className='px-10 w-full'>
+            <HTMLFlipBook
+              width={800}
+              height={1200}
+              minWidth={400}
+              maxWidth={1000}
+              minHeight={400}
+              maxHeight={2000}
+              size='stretch'
+              maxShadowOpacity={0.5}
+              // showCover={true}
+              usePortrait={false}
+              useMouseEvents={false}
+              mobileScrollSupport={true}
+              onFlip={onPage}
+              className={`h-full  w-full`}
+              ref={flipBookRef}>
+              {dataProducts?.map((item, key) => (
+                <Page
+                  data={item?.page?.body}
+                  footerHeight={item?.page?.footerSize}
+                  headerHeight={item?.page?.headerSize}
+                  number={key}
+                  srcHeaderBg={item?.page?.headerBg}
+                  srcFooterBg={item?.page?.footerBg}
+                  handleClickOnImage={handleClickOnImage}
+                  key={key}>
+                  Lorem ipsum...
+                </Page>
+              ))}
+            </HTMLFlipBook>
+          </div>
+          <div className='container mx-auto my-4'>
+            <div className='flex items-center justify-center gap-5 '>
               <button
                 type='button'
                 onClick={nextButtonClick}
