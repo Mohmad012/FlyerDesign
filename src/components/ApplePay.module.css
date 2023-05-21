@@ -1,0 +1,14 @@
+.applePay {
+  display: inline-block;
+  -webkit-appearance: -apple-pay-button;
+  -apple-pay-button-type: plain; /* Use any supported button type. */
+  cursor: pointer;
+  height: 50px;
+  border-radius: 8px;
+}
+.applePayBlack {
+  -apple-pay-button-style: black;
+}
+.applePayWhite {
+  -apple-pay-button-style: white;
+}

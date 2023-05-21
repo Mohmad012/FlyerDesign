@@ -1,0 +1,120 @@
+// customized swiper arrows style
+.c-swiper {
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: rgba(255, 255, 255, 0.5) !important;
+    background-color: #eb008c;
+    font-size: 1rem;
+    padding: 10px 24px;
+  }
+
+  .swiper-button-next {
+    left: 0 !important;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .swiper-button-prev {
+    right: 0 !important;
+    border-radius: 8px 0 0 8px;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 1.5rem !important;
+  }
+
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background-color: lighten(#eb008c, 5);
+  }
+}
+
+// reverse swiper slider arrows on dir change
+html[dir='ltr'] {
+  .c-swiper {
+    .swiper-button-prev {
+      left: 0 !important;
+      right: auto !important;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .swiper-button-next {
+      right: 0 !important;
+      left: auto !important;
+      border-radius: 8px 0 0 8px;
+    }
+  }
+}
+
+.CategorySlides {
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #eb008c;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+.HomeSlides {
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #eb008c;
+    background-color: white;
+    height: 2rem;
+    padding-top: 2px;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+}
+
+.HomeSlides[dir='ltr'] {
+  .swiper-button-prev {
+    left: 0px !important;
+    right: auto !important;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .swiper-button-next {
+    right: 0 !important;
+    left: auto !important;
+    border-radius: 8px 0 0 8px;
+  }
+}
+
+.HomeSlides[dir='rtl'] {
+  .swiper-button-next {
+    left: 0px !important;
+    right: auto !important;
+    border-radius: 0 10px 10px 0;
+  }
+  .swiper-button-prev {
+    right: 0px !important;
+    left: auto !important;
+    border-radius: 10px 0 0 10px;
+  }
+}
+.HomeSlides[dir='ltr'].relocationPrevNextBtn {
+  .swiper-button-prev {
+    left: 15px !important;
+  }
+}
+
+.CatalogueVIP {
+  display: flex !important;
+
+  .customNumber {
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-color: gray;
+    -webkit-text-stroke-width: 4px;
+    font-family: sans-serif;
+    transform: translateX(2.5rem);
+    z-index: -1;
+  }
+}

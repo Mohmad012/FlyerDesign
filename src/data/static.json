@@ -1,0 +1,214 @@
+[
+	{
+		"Navigation":[
+			{
+				"path":"/",
+				"title":"home_page_key"
+			},
+			{
+				"path":"/checkout",
+				"title":"checkout_page_key"
+			},
+			{
+				"path":"/cart",
+				"title":"cart_page_key"
+			},
+			{
+				"path":"/category",
+				"title":"category_page_key"
+			},
+			{
+				"path":"/login",
+				"title":"login_page_key"
+			},
+			{
+				"path":"/products",
+				"title":"products_page_key"
+			},
+			{
+				"path":"/register",
+				"title":"register_page_key"
+			},
+			{
+				"path":"/success",
+				"title":"success_page_key"
+			}
+		],
+		"homePage":{
+			"CataloguesOffers":[
+			    {
+					"title": "IMG_4985.HEIC",
+					"id":1,
+					"size": "Offer expires 2/2/2023",
+					"bgColor":"bg-white",
+					"hoverBgColor":"hover:bg-primary-600",
+					"hoverTextColor":"hover:text-white",
+					"hoverBorderColor":"hover:border-transparent",
+					"textColor":"text-primary-600",
+					"addTagBadge":true,
+					"borderColor":"border-primary-600",
+					"source":"/assets/images/products/Rectangle 22.jpg"
+			    },
+			    {
+					"title": "IMG_4985.HEIC",
+					"id":2,
+					"size": "Offer expires 2/2/2023",
+					"bgColor":"bg-white",
+					"hoverBgColor":"hover:bg-primary-600",
+					"hoverTextColor":"hover:text-white",
+					"hoverBorderColor":"hover:border-transparent",
+					"textColor":"text-primary-600",
+					"addTagBadge":true,
+					"borderColor":"border-primary-600",
+					"source":"/assets/images/products/Rectangle 23.jpg"
+			    },
+			    {
+					"title": "IMG_4985.HEIC",
+					"id":3,
+					"size": "Offer expires 2/2/2023",
+					"bgColor":"bg-teal-400",
+					"hoverBgColor":"hover:bg-teal-600",
+					"hoverTextColor":"hover:text-white",
+					"hoverBorderColor":"hover:border-transparent",
+					"textColor":"text-teal-900",
+					"addTagBadge":true,
+					"borderColor":"border-teal-400",
+					"source":"/assets/images/products/Rectangle 20.jpg"
+			    },
+			    {
+					"title": "IMG_4985.HEIC",
+					"id":4,
+					"size": "Offer expires 2/2/2023",
+					"bgColor":"bg-teal-400",
+					"hoverBgColor":"hover:bg-teal-600",
+					"hoverTextColor":"hover:text-white",
+					"hoverBorderColor":"hover:border-transparent",
+					"textColor":"text-teal-900",
+					"addTagBadge":true,
+					"borderColor":"border-teal-400",
+					"source":"/assets/images/products/Rectangle 21.jpg"
+			    }
+			],
+			"AmazingDiscountsOnHomeProducts":[
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-red",
+			    "num": 1,
+			    "id": 5,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-teal-400",
+			    "hoverBgColor": "hover:bg-teal-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-teal-900",
+			    "addTagBadge": true,
+			    "borderColor": "border-teal-400",
+			    "source": "/assets/images/products/airFryer.jpg"
+			  },
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-black",
+			    "num": 2,
+			    "id": 6,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-white",
+			    "hoverBgColor": "hover:bg-primary-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-primary-600",
+			    "borderColor": "border-primary-600",
+			    "source": "/assets/images/products/pan.jpg"
+			  },
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-orange",
+			    "num": 3,
+			    "id": 7,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-white",
+			    "hoverBgColor": "hover:bg-primary-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-primary-600",
+			    "borderColor": "border-primary-600",
+			    "addTagBadge": true,
+			    "source": "/assets/images/products/bed.jpg"
+			  },
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-green",
+			    "num": 4,
+			    "id": 8,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-teal-400",
+			    "hoverBgColor": "hover:bg-teal-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-teal-900",
+			    "borderColor": "border-teal-400",
+			    "source": "/assets/images/products/towel.jpg"
+			  }
+			],
+			"TheMostImportantCatalogues":[
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-red",
+			    "num": 1,
+			    "id": 5,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-teal-400",
+			    "hoverBgColor": "hover:bg-teal-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-teal-900",
+			    "addTagBadge": true,
+			    "borderColor": "border-teal-400",
+			    "source": "/assets/images/products/Deals.jpg"
+			  },
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-black",
+			    "num": 2,
+			    "id": 6,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-white",
+			    "hoverBgColor": "hover:bg-primary-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-primary-600",
+			    "borderColor": "border-primary-600",
+			    "source": "/assets/images/products/Deals.jpg"
+			  },
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-orange",
+			    "num": 3,
+			    "id": 7,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-white",
+			    "hoverBgColor": "hover:bg-primary-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-primary-600",
+			    "borderColor": "border-primary-600",
+			    "addTagBadge": true,
+			    "source": "/assets/images/products/Rectangle-33.jpg"
+			  },
+			  {
+			    "title": "IMG_4985.HEIC",
+			    "class": "customNumber-green",
+			    "num": 4,
+			    "id": 8,
+			    "heightCard": "h-77 pb-5",
+			    "bgColor": "bg-teal-400",
+			    "hoverBgColor": "hover:bg-teal-600",
+			    "hoverTextColor": "hover:text-white",
+			    "hoverBorderColor": "hover:border-transparent",
+			    "textColor": "text-teal-900",
+			    "borderColor": "border-teal-400",
+			    "source": "/assets/images/products/Rectangle-33.jpg"
+			  }
+			]
+		}
+	}
+]

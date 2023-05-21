@@ -1,0 +1,24 @@
+.featued-product-slider {
+	.slide {
+		height: 100%;
+		background-color: #ccc;
+		padding: 10px;
+	}
+
+	.slick-dots {
+		position: absolute;
+		bottom: 160px;
+
+		li {
+			width: 100px;
+			height: 44px;
+		}
+	}
+}
+
+.CataloguesOffersSlick {
+	.slick-track {
+		display: flex;
+		gap: 1rem
+	}
+}

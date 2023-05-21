@@ -1,0 +1,104 @@
+pipeline {
+    agent {
+    kubernetes {
+      yamlFile 'devops/KubernetesPod.yaml'
+      defaultContainer 'kaniko'
+      retries 2
+    }
+  }
+    environment {
+        APP="web"
+        ECR="445522616181.dkr.ecr.me-south-1.amazonaws.com"
+        HUB="supportv4tech"
+        VERSION="1.0.0-snapshot"
+    }
+    stages {
+        stage("init"){
+            when {
+                 expression { BRANCH_NAME ==~ /(development|master)/ }
+            }
+            steps{
+                script{
+                    slackSend (channel: "#jenkins", color: '#FF9800', message: "${APP}: Build started <${env.BUILD_URL}|#${env.BUILD_NUMBER}> commit ${env.GIT_COMMIT[0..6]} on ${env.BRANCH_NAME}")
+                    configs(BRANCH_NAME)
+                    withVault(configuration: [timeout: 60], vaultSecrets: [[path: 'v2/${APP}/${namespace}', secretValues: [[vaultKey: 'env']]]]) {
+                        writeFile file: '.env', text: env.env
+                    }
+                }
+            }
+        }
+        stage('build') {
+            when {
+                 expression { BRANCH_NAME ==~ /(development|master)/ }
+            }
+            steps {
+              script{              
+                sh '''
+                /kaniko/executor  --cache=true --compressed-caching=false --snapshotMode=redo  --cache-repo=${ECR}/cache/${APP} --dockerfile `pwd`/devops/Dockerfile --context `pwd`  --destination=${ECR}/${APP}:${timestamp}-${VERSION} --destination=${HUB}/${APP}:${VERSION}
+                '''
+              }
+            }
+            post {
+               success {
+                   slackSend (channel: "#jenkins", color: '#3380C7', message: "${APP}: Image built on build <${env.BUILD_URL}|#${env.BUILD_NUMBER}>")
+                   echo 'Compile Stage Successful'
+               }
+               failure {
+                   slackSend (channel: "#jenkins", color: '#F44336', message: "${APP}: Image build failed <${env.BUILD_URL}|#${env.BUILD_NUMBER}>")
+                   echo 'Compile Stage Failed'
+                   sh "exit 1"
+               }
+           }
+        }
+    
+        
+      stage('deploy') {
+        when {
+                 expression { BRANCH_NAME ==~ /(development|master)/ }
+            }
+            steps {      
+                withKubeConfig([credentialsId:"v2-k8s"]){            
+                    container(name: 'k8s') {
+                    sh '''
+                        cp devops/default.conf devops/helm/${APP}
+                        helm upgrade --install ${APP} \
+                        -n ${namespace} \
+                        devops/helm/${APP} \
+                        --set image.tag=${timestamp}-${VERSION},image.repository=${ECR}/${APP} \
+                        -f devops/helm/${APP}/${helmvalues} \
+                        --timeout 20m --wait \
+                        --atomic 
+                    '''
+                    }
+                }
+            }
+            post {
+               success {
+                   slackSend (channel: "#jenkins", color: '#3380C7', message: "${APP}: Deployment completed <${env.BUILD_URL}|#${env.BUILD_NUMBER}>")
+                   echo 'Deployment completed'
+               }
+               failure {
+                   slackSend (channel: "#jenkins", color: '#F44336', message: "${APP}: Deployment failed <${env.BUILD_URL}|#${env.BUILD_NUMBER}>")
+                   echo 'Deployment failed'
+                   sh "exit 1"
+               }
+           }
+      }
+    }
+}
+
+def configs(branch){
+    script{
+        def environments = [
+                "development": [
+                    "helmvalues":"values-development.yaml",
+                    "namespace":"development"],
+                "master": [
+                    "helmvalues":"values.yaml",
+                    "namespace":"production"]
+            ]
+        env.helmvalues=environments."${branch}"."helmvalues"
+        env.namespace=environments."${branch}"."namespace"
+        env.timestamp=sh(script: 'date "+%Y%m%d%H%M%S"',  returnStdout: true).trim()
+    }
+}

@@ -1,0 +1,121 @@
+# Default values for web.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: 445522616181.dkr.ecr.me-south-1.amazonaws.com/web
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.0.0"
+
+imagePullSecrets:
+  - name: myregistrykey
+nameOverride: ""
+fullnameOverride: ""
+
+strategy:
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1
+  type: RollingUpdate
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: enable
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: web-dev.voucherek.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 500m
+    memory: 1024Mi
+  requests:
+    cpu: 100m
+    memory: 250Mi
+
+readinessProbe:
+  httpGet:
+    path: /api/readyApp
+    port: 3000
+  initialDelaySeconds: 5
+  timeoutSeconds: 180
+  periodSeconds: 5
+livenessProbe:
+  httpGet:
+    path: /api/readyApp
+    port: 3000
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  failureThreshold: 5
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 400
+  targetMemoryUtilizationPercentage: 320
+
+nodeSelector:
+  enviroment: development
+
+tolerations: []
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - topologyKey: kubernetes.io/hostname
+      labelSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: In
+          values:
+          - web
+
+data:
+  enabled: false
+
+nginx_proxy:
+  enabled: true
+
+enableServiceLinks: false

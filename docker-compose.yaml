@@ -1,0 +1,39 @@
+---
+version: "3.0"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./devops/Dockerfile
+    image: web
+    container_name: web-container
+    ports:
+      - '3000:3000'
+  api:
+    image: supportv4tech/api:1.0.0-snapshot
+    container_name: api-container
+    ports:
+      - '5003:5003'
+    volumes:
+      - type: bind
+        source: ./.env-api
+        target: /usr/src/app/.env
+  elasticsearch:
+    container_name: es-container
+    restart: always
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
+    environment:
+      - "discovery.type=single-node"
+      - bootstrap.memory_lock=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+  redis:
+    image: redis:7.0.4
+    restart: always
+    container_name: redis-container
+    ports:
+      - '6379:6379'
